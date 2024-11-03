@@ -28,11 +28,13 @@ FROM Movies
 WHERE Id = 6;
 
 -- Find the movies released in the years between 2000 and 2010
+*** --BETWEEN
 SELECT *
 FROM Movies
 WHERE Year BETWEEN 2000 AND 2010;
 
 -- Find the movies not released in the years between 2000 and 2010
+*** --NOT BETWEEN
 SELECT *
 FROM Movies
 WHERE Year NOT BETWEEN 2000 AND 2010;
@@ -45,6 +47,7 @@ WHERE Id BETWEEN 1 AND 5;
 -- CH3 - Queries with constraints (Pt. 2)
 
 -- Find all the Toy Story movies
+*** --Title LIKE "%Toy Story%"
 SELECT *
 FROM Movies
 WHERE Title LIKE "%Toy Story%";
@@ -55,6 +58,7 @@ FROM Movies
 WHERE Director = "John Lasseter";
 
 -- Find all the movies (and director) not directed by John Lasseter
+*** --!=
 SELECT *
 FROM Movies
 WHERE Director != "John Lasseter";
@@ -67,11 +71,13 @@ WHERE Title LIKE "%WALL%";
 -- CH4 - Filtering and sorting Query results
 
 -- List all directors of Pixar movies (alphabetically), without duplicates
+*** --DISTINCT is for removing duplicates
 SELECT DISTINCT Director
 FROM Movies
 ORDER BY Director;
 
 -- List the last four Pixar movies released (ordered from most recent to least)
+*** --ORDER BY AND LIMIT
 SELECT *
 FROM Movies
 ORDER BY Year DESC
@@ -84,6 +90,7 @@ ORDER BY Title ASC
 LIMIT 5;
 
 -- List the next five Pixar movies sorted alphabetically
+*** --OFFSET is for next 5 
 SELECT *
 FROM Movies
 ORDER BY Title ASC
@@ -93,6 +100,7 @@ OFFSET 5;
 -- CH5 - Review Simple SELECT Queries
 
 -- List all the Canadian cities and their populations 
+*** --LIKE
 SELECT *
 FROM North_american_cities
 WHERE Country LIKE "Canada";
@@ -104,12 +112,14 @@ WHERE Country = "United States"
 ORDER BY Latitude DESC;
 
 -- List all the cities west of Chicago, ordered from west to east
+*** -- <
 SELECT *
 FROM North_american_cities
 WHERE Longitude < -87.69
 ORDER BY Longitude ASC;
 
 -- List the two largest cities in Mexico (by population)
+
 SELECT *
 FROM North_american_cities
 WHERE Country LIKE "Mexico"
@@ -125,7 +135,7 @@ LIMIT 2
 OFFSET 2;
 
 -- CH6 - Multi-table queries with JOINs
-
+*** --JOIN  
 -- Find the domestic and international sales for each movie
 SELECT Title, International_sales, Domestic_sales
 FROM Movies JOIN Boxoffice
@@ -146,6 +156,7 @@ ORDER BY Rating DESC;
 -- CH7 - OUTER JOIN
 
 -- Find the list of all buildings that have employees
+*** --NOT NULL
 SELECT DISTINCT Building
 FROM Employees
 LEFT JOIN Buildings ON Building=Building_name
@@ -163,6 +174,7 @@ LEFT JOIN employees ON building_name = building;
 -- CH8 - A short note on NULLs
 
 -- Find the name and role of all employees who have not been assigned to a building
+*** --IS NULL 
 SELECT *
 FROM Employees
 LEFT JOIN Buildings
